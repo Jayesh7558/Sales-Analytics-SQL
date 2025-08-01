@@ -1,0 +1,14 @@
+-- Sales performance by region
+SELECT 
+    dc.region,
+    SUM(fs.sold_quantity * dp.product_price) AS revenue
+FROM 
+    fact_sales fs
+JOIN 
+    dim_product dp ON fs.product_code = dp.product_code
+JOIN 
+    dim_customers dc ON fs.customer_code = dc.customer_code
+GROUP BY 
+    dc.region
+ORDER BY 
+    revenue DESC;
